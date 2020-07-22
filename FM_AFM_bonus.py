@@ -16,13 +16,16 @@ anneal schedule). We support annealing times in the range of 1 us to 2 ms.
 The anneal schedule allows you to modify the way the QPU progresses through the anneal. The anneal trajectory is 
 represented by s, where s=0 is the beginning of the anneal and s=1 is the end. By changing the time at which the QPU
 ends up in a certain part of the anneal (s), you can change the shape of the energy waveform. For example, you can 
-introduce a pause or finish the anneal really quickly part way through (quench). 
+introduce a pause or finish the anneal really quickly part way through (quench). Changing the anneal schedule will 
+change how the dynamics of your problem evolve as it progresses through the anneal. An example application of 
+modifying the anneal schedule is reverse annealing, where we can progress backward from s=1 to some intermediate s. 
+This can be useful for example if we'd like to initialize the processor with a classical spin state (as opposed to 
+the uncoupled superposition state that exists at s=0)
 
 The anneal schedule is specified by a piecewise linear set of (time, s) coordinates. The default anneal schedule is:
     default_anneal_schedule = [(0.0, 0.0), (20.0, 1)]
 
-(Note that the segments in the anneal schedule are linear in anneal fraction s, but since the energy scale is not linear in 
-s, the anneal schedule also does not 
+(Note that the segments in the anneal schedule are linear in anneal fraction s, not problem energy scale)
     
 Let's say you want to change the anneal schedule so that in 15 us you are 40% of the way through the anneal. Then you
 want to pause for 5 us and then progress through the remaining 60% of the anneal in another 10 us. This is how you would 
@@ -40,11 +43,10 @@ num_qubits = 10                        # Number of qubits in our chain
 fm_qubit_bias = [0] * num_qubits       # List of biases to apply to each qubit in our chain
 fm_coupler_strength = -1               # The coupling we want to apply to two adjacent qubits
 
-annealing_time = 2000
+annealing_time = 20
 anneal_schedule = [(0.0, 0.0), (20, 1)]
 
 # Ising model parameters
-fm_qubit_bias[1] = -0.8
 h = fm_qubit_bias
 J = {}
 

@@ -28,12 +28,10 @@ Suggested exercises:
 # Modifiable parameters
 num_qubits = 10                        # Number of qubits in our chain
 fm_qubit_bias = [0] * num_qubits       # List of biases to apply to each qubit in our chain
-fm_coupler_strength = -20               # The coupling we want to apply to two adjacent qubits
+fm_coupler_strength = -1               # The coupling we want to apply to two adjacent qubits
 num_reads = 10                         # The number of times the QPU is sampled
 
 # Ising model parameters
-fm_qubit_bias[0] = -10
-fm_qubit_bias[num_qubits-1] = 10
 h = fm_qubit_bias
 J = {}                                # coupling strength is specified using a dictionary
 
