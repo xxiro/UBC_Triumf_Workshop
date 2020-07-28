@@ -22,6 +22,7 @@ of edges
 from dwave.system import DWaveSampler, EmbeddingComposite
 from collections import defaultdict
 import networkx as nx
+import dwave.inspector as inspector
 
 # 2. Set up the problem
 # Create empty graph
@@ -46,6 +47,8 @@ sampler = EmbeddingComposite(DWaveSampler(solver={'qpu': True}))
 
 # 4. Solve the problem
 sampleset = sampler.sample_qubo(Q, chain_strength=8, num_reads=100)
+
+inspector.show(sampleset)
 
 # 5. Interpret the results - print the results with the lowest energy
 print(sampleset.lowest())
