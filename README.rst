@@ -1,5 +1,5 @@
 ===================
-Job Shop Scheduling
+Quantum Annealing
 ===================
 
 This repo contains the code for the exercises we're going over in the Introduction 
