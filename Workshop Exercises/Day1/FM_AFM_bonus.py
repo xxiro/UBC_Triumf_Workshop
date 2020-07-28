@@ -1,6 +1,16 @@
-# 1. Import packages
-from dwave.system import EmbeddingComposite, DWaveSampler
-import dwave.inspector as inspector
+# Copyright 2020 D-Wave Systems Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 
 '''
@@ -31,6 +41,10 @@ Investigate
     3. What kinds of problems do you think would be more susceptible to changes in the anneal schedule?
 '''
 
+# Import packages
+from dwave.system import EmbeddingComposite, DWaveSampler
+import dwave.inspector as inspector
+
 # Modifiable parameters
 num_qubits = 10                        # Number of qubits in our chain
 fm_qubit_bias = [0] * num_qubits       # List of biases to apply to each qubit in our chain
@@ -53,9 +67,9 @@ for i in range(num_qubits-1):
 #         To use annealing_schedule:
 #               response = sampler.sample_ising(h, J, annealing_schedule=annealing_schedule num_reads=10)
 sampler = EmbeddingComposite(DWaveSampler())
-response = sampler.sample_ising(h, J, anneal_schedule=anneal_schedule, num_reads=100)
+sampleset = sampler.sample_ising(h, J, anneal_schedule=anneal_schedule, num_reads=100)
 
-inspector.show(response)
+inspector.show(sampleset)
 
 print("QPU response")
-print(response)
+print(sampleset)
