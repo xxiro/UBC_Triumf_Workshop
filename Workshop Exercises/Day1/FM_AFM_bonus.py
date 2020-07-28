@@ -66,7 +66,7 @@ for i in range(num_qubits-1):
 #               response = sampler.sample_ising(h, J, annealing_time=annealing_time num_reads=10)
 #         To use annealing_schedule:
 #               response = sampler.sample_ising(h, J, annealing_schedule=annealing_schedule num_reads=10)
-sampler = EmbeddingComposite(DWaveSampler())
+sampler = EmbeddingComposite(DWaveSampler(solver={'qpu': True}))
 sampleset = sampler.sample_ising(h, J, anneal_schedule=anneal_schedule, num_reads=100)
 
 inspector.show(sampleset)

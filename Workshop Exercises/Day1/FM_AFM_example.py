@@ -38,7 +38,7 @@ for i in range(num_qubits-1):
     J[(i, i+1)] = fm_coupler_strength
 
 # Submit the problem to the QPU
-sampler = EmbeddingComposite(DWaveSampler())
+sampler = EmbeddingComposite(DWaveSampler(solver={'qpu': True}))
 sampleset = sampler.sample_ising(h, J, num_reads=10)
 
 inspector.show(sampleset)
